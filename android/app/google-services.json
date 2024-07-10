@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "990762397956",
+    "project_id": "certamen3appmovil-8c66d",
+    "storage_bucket": "certamen3appmovil-8c66d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990762397956:android:80eecfc95717be4ae6e051",
+        "android_client_info": {
+          "package_name": "com.tomas.certamen_3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxtN0rJ8NI4VsPFI3qIQZY2pgoYLH3bko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
