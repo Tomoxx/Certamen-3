@@ -1,16 +1,3 @@
-# certamen_3
+# Certamen 3 - Tomás Peña y Zachir Faundez
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Esta simple aplicación tiene 3 colecciones en firestore: games, developers and publishers, games tiene 5 fields, mostrando nombre, developer, publisher, precio y fecha de lanzamiento. Ambos developers and publishers tienen 3 fields, nombre, website y endorsements.
