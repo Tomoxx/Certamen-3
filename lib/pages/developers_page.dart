@@ -1,54 +1,45 @@
-import 'package:certamen_3/pages/game_form_page.dart';
-import 'package:certamen_3/services/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'game_detail_page.dart';
+import 'developer_detail_page.dart';
+import 'developer_form_page.dart';
 
-class GamesPage extends StatelessWidget {
-  const GamesPage({super.key});
+class DevelopersPage extends StatelessWidget {
+  const DevelopersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Games'),
+        title: Text('Developers'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: StreamBuilder(
-          stream: FirestoreService().games(),
+          stream:
+              FirebaseFirestore.instance.collection('developers').snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData ||
                 snapshot.connectionState == ConnectionState.waiting) {
-              // Waiting for data
               return Center(child: CircularProgressIndicator());
             } else {
-              // Data arrived, show on page
               return ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  var game = snapshot.data!.docs[index];
-                  Timestamp timestamp = game['release_date'];
-                  DateTime dateTime = timestamp.toDate();
-                  String formattedDate =
-                      DateFormat('dd-MM-yyyy').format(dateTime);
-                  int price = game['price'];
+                  var developer = snapshot.data!.docs[index];
 
                   return ListTile(
-                    title: Text('${game['name']}'),
+                    title: Text('${developer['name']}'),
                     subtitle: Text(
-                      'Developer: ${game['developer']}\n'
-                      'Publisher: ${game['publisher']}\n'
-                      'Price: \$${price.toStringAsFixed(2)}\n'
-                      'Release Date: $formattedDate',
+                      'Website: ${developer['website']}\n'
+                      'Endorsements: ${developer['endorsements']}',
                     ),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => GameDetailPage(game: game),
+                          builder: (context) =>
+                              DeveloperDetailPage(developer: developer),
                         ),
                       );
                     },
@@ -63,7 +54,7 @@ class GamesPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => GameFormPage()),
+            MaterialPageRoute(builder: (context) => DeveloperFormPage()),
           );
         },
         child: Icon(Icons.add),

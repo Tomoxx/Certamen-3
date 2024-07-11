@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
-class GameDetailPage extends StatelessWidget {
-  final DocumentSnapshot game;
+class DeveloperDetailPage extends StatelessWidget {
+  final DocumentSnapshot developer;
 
-  const GameDetailPage({required this.game, super.key});
+  const DeveloperDetailPage({required this.developer, super.key});
 
-  void _deleteGame(BuildContext context) async {
+  void _deleteDeveloper(BuildContext context) async {
     bool? confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Confirm Delete'),
-        content: Text('Are you sure you want to delete this game?'),
+        content: Text('Are you sure you want to delete this developer?'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -28,17 +27,17 @@ class GameDetailPage extends StatelessWidget {
 
     if (confirm == true) {
       FirebaseFirestore.instance
-          .collection('games')
-          .doc(game.id)
+          .collection('developers')
+          .doc(developer.id)
           .delete()
           .then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Game deleted')),
+          SnackBar(content: Text('Developer deleted')),
         );
         Navigator.of(context).pop(); // Go back to the previous page
       }).catchError((error) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to delete game: $error')),
+          SnackBar(content: Text('Failed to delete developer: $error')),
         );
       });
     }
@@ -46,14 +45,9 @@ class GameDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timestamp timestamp = game['release_date'];
-    DateTime dateTime = timestamp.toDate();
-    String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
-    int price = game['price'];
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(game['name']),
+        title: Text(developer['name']),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -61,20 +55,16 @@ class GameDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Name: ${game['name']}',
+              'Name: ${developer['name']}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
-            Text('Developer: ${game['developer']}'),
+            Text('Website: ${developer['website']}'),
             SizedBox(height: 8),
-            Text('Publisher: ${game['publisher']}'),
-            SizedBox(height: 8),
-            Text('Price: \$${price.toStringAsFixed(2)}'),
-            SizedBox(height: 8),
-            Text('Release Date: $formattedDate'),
+            Text('Endorsements: ${developer['endorsements']}'),
             Spacer(),
             ElevatedButton(
-              onPressed: () => _deleteGame(context),
+              onPressed: () => _deleteDeveloper(context),
               child: Icon(Icons.delete),
             ),
           ],

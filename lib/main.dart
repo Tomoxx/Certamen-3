@@ -1,5 +1,6 @@
-import 'package:certamen_3/pages/create_game_page.dart';
+import 'package:certamen_3/pages/developers_page.dart';
 import 'package:certamen_3/pages/games_page.dart';
+import 'package:certamen_3/pages/publishers_page.dart';
 import 'package:certamen_3/widgets/card_item.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +52,24 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                   CardItem(
-                    title: 'Add Game',
-                    icon: Icons.sports_esports,
+                    title: 'Developers',
+                    icon: Icons.developer_board,
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => GameFormPage()),
+                        MaterialPageRoute(
+                            builder: (context) => DevelopersPage()),
+                      );
+                    },
+                  ),
+                  CardItem(
+                    title: 'Publishers',
+                    icon: Icons.business_center,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PublishersPage()),
                       );
                     },
                   ),
