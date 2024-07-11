@@ -47,6 +47,9 @@ class _PublisherFormPageState extends State<PublisherFormPage> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the name';
                   }
+                  if (value.length < 2) {
+                    return 'The publisher name needs atleast 2 characters';
+                  }
                   return null;
                 },
               ),

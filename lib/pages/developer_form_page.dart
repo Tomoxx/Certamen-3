@@ -47,6 +47,9 @@ class _DeveloperFormPageState extends State<DeveloperFormPage> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the name';
                   }
+                  if (value.length < 2) {
+                    return 'The developer name needs atleast 2 characters';
+                  }
                   return null;
                 },
               ),
